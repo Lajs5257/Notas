@@ -19,8 +19,24 @@ function agregarNota(e) {
     const nota = document.querySelector('#nota').value;
 
     if(nota === '' ){
-        console.log('No puede ir vacio');
+        mostrarError('No puede ir vacio');
         return;
     }
     console.log('agregando nota');
+}
+
+
+//Mostrar mensajes de error
+function mostrarError(error) {
+    const mensajeError = document.createElement('p');
+    mensajeError.textContent = error;
+    mensajeError.classList.add('error');
+
+    //Lo insertamos
+    const contenido = document.querySelector('#contenido');
+    contenido.appendChild(mensajeError);
+
+    setTimeout(() => {
+        mensajeError.remove();
+    },3000);
 }
