@@ -22,7 +22,16 @@ function agregarNota(e) {
         mostrarError('No puede ir vacio');
         return;
     }
-    console.log('agregando nota');
+    // Añadir a las notas
+    const notaObj = {
+        id: Date.now(),
+        nota
+    }
+    notas = [...notas, notaObj];
+    console.log(notas);
+
+    //Crear el html
+    crearHTML();
 }
 
 
@@ -40,3 +49,26 @@ function mostrarError(error) {
         mensajeError.remove();
     },3000);
 }
+
+function crearHTML() {
+    if( notas.length > 0 ) {
+        limpiarHTML();
+        notas.forEach(nota => {
+            const li = document.createElement('li');
+
+            //añadimos texto
+            li.innerText = nota.nota;
+
+            //lo insertamos a la lista
+            listaNotas.appendChild(li);
+        });
+    }
+}
+
+//limpiar html
+function limpiarHTML() {
+    while( listaNotas.firstChild) {
+        listaNotas.removeChild(listaNotas.firstChild);
+    }
+}
+
