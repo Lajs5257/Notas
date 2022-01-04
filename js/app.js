@@ -32,6 +32,9 @@ function agregarNota(e) {
 
     //Crear el html
     crearHTML();
+
+    //reiniciamos el formrulario
+    formulario.reset();
 }
 
 
@@ -51,8 +54,8 @@ function mostrarError(error) {
 }
 
 function crearHTML() {
+    limpiarHTML();
     if( notas.length > 0 ) {
-        limpiarHTML();
         notas.forEach(nota => {
             const li = document.createElement('li');
 
@@ -63,6 +66,7 @@ function crearHTML() {
             listaNotas.appendChild(li);
         });
     }
+    sincronizarStorage();
 }
 
 //limpiar html
@@ -72,3 +76,7 @@ function limpiarHTML() {
     }
 }
 
+// Agrega las notas acutales al local storage
+function sincronizarStorage() {
+    localStorage.setItem(JSON.stringify(notas));
+}
