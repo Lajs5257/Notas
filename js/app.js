@@ -18,5 +18,9 @@ function agregarNota(e) {
     // Textarea donde usuario escribira la nota
     const nota = document.querySelector('#nota').value;
 
-    console.log(nota);
+    if(nota === '' ){
+        console.log('No puede ir vacio');
+        return;
+    }
+    console.log('agregando nota');
 }
