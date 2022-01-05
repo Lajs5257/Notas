@@ -65,10 +65,23 @@ function crearHTML() {
     limpiarHTML();
     if( notas.length > 0 && notas !== null) {
         notas.forEach(nota => {
+            //Agregamos boton de eliminar
+            const btnEliminar = document.createElement('a');
+            btnEliminar.classList.add('borrar-nota');
+            btnEliminar.innerText = 'X';
+
+            //Añadir la funcion de eliminar
+            btnEliminar.onclick = () => {
+                borrarNota(nota.id);
+            }
+
             const li = document.createElement('li');
 
             //añadimos texto
             li.innerText = nota.nota;
+
+            //Asiganamos el boton
+            li.appendChild(btnEliminar);
 
             //lo insertamos a la lista
             listaNotas.appendChild(li);
@@ -87,4 +100,9 @@ function limpiarHTML() {
 // Agrega las notas acutales al local storage
 function sincronizarStorage() {
     localStorage.setItem('notas',JSON.stringify(notas));
+}
+//Elimina una nota
+function borrarNota(id) {
+    notas = notas.filter(nota => nota.id !== id);
+    crearHTML();
 }
