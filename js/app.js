@@ -8,6 +8,14 @@ let notas = [];
 eventListeners();
 
 function eventListeners() {
+    //cuando se carga el documento
+    document.addEventListener('DOMContentLoaded', () => {
+        notas = JSON.parse( localStorage.getItem('notas') ) || []  ;
+        console.log(notas);
+        crearHTML();
+   });
+
+    //Cuando se agerga nota
     formulario.addEventListener('submit', agregarNota);
 }
 
@@ -55,7 +63,7 @@ function mostrarError(error) {
 
 function crearHTML() {
     limpiarHTML();
-    if( notas.length > 0 ) {
+    if( notas.length > 0 && notas !== null) {
         notas.forEach(nota => {
             const li = document.createElement('li');
 
@@ -78,5 +86,5 @@ function limpiarHTML() {
 
 // Agrega las notas acutales al local storage
 function sincronizarStorage() {
-    localStorage.setItem(JSON.stringify(notas));
+    localStorage.setItem('notas',JSON.stringify(notas));
 }
